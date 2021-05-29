@@ -35,29 +35,29 @@ cordura is a web app where users nearing end-of-life can easily complete their l
 ### What's next for Cordura
 
 `Authentication`
-[] authentication using magic
+- [] authentication using magic
 
 `To Do`
-[] warning on attempt of adding more than four task for a day
-[] add email invite in todo list
-[] suggestion of task randomly
-[] task suggestion which have been added by maximum users
-[] setting up the reminder feature
-[] suggesting user who have more than 50% similarities on task list for initiating a chat with them
-[] daily special task suggestion which benefits in mental and physical health
+- [] warning on attempt of adding more than four task for a day
+- [] add email invite in todo list
+- [] suggestion of task randomly
+- [] task suggestion which have been added by maximum users
+- [] setting up the reminder feature
+- [] suggesting user who have more than 50% similarities on task list for initiating a chat with them
+- [] daily special task suggestion which benefits in mental and physical health
 
 
 `Messaging Platform`
-[] platform setup
-[] sentiment analysis using symbl.ai
-[] music suggestion based on conversation mood
-[] choosing feature to stay in karaoke or leave (turn on/off the music and changing UI based on mood)
-[] finding TF model to suggest music
-[] converting model in TF.js
+- [] platform setup
+- [] sentiment analysis using symbl.ai
+- [] music suggestion based on conversation mood
+- [] choosing feature to stay in karaoke or leave (turn on/off the music and changing UI based on mood)
+- [] finding TF model to suggest music
+- [] converting model in TF.js
 
 `Special events`
 
-[] suggesting special events in near by areas
+- [] suggesting special events in near by areas
 
  
 
