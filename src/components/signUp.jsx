@@ -3,7 +3,7 @@ import { db } from './firebase'
 
 function SignUp() {
 
-    // const[arr] = useState(['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday',])
+    const[arr] = useState(['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday',])
 
     // useEffect(() => {
     //     const obj = {
@@ -12,7 +12,8 @@ function SignUp() {
     //         Day: "",
     //         Id: "",
     //         status: false,
-    //         RemindMe: ""
+    //         RemindMe: "",
+    //         CreatedAt: "",
     //     }
 
     //     arr.forEach(day => {
@@ -26,7 +27,7 @@ function SignUp() {
     //             })
     //         }
     //     })
-    // })
+    // }, [])
 
     return (
         <div>hello</div>
