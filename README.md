@@ -1,70 +1,66 @@
-# Getting Started with Create React App
+# Cordura
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Inspiration
 
-In the project directory, you can run:
+Mental health disorders are a real issue for both professionals and patients due to the complexity of the disease and limited resources. Unfortunately, COVID19 is a great challenge for mental healthcare and the demand for effective digital healthcare has peaked.
+150 million Indians suffer from some form of mental illness of which only 30 million have consulted a therapist. This number is 450 million at the global level. Moreover, the pandemic has led to a large increase in the number of mental illness cases.
+I was inspired by our reality as we all come to a moment of sadness, loneliness, depression, unmotivated... but we don't really pay attention to it consequences. The thing is that our mental health is really important, as important as our physical health. I was inspired by my own case, I've been through a difficult year and I first thought it wasn't a big deal, but now I am suffering of some memory trouble, heart problem, bad blood pressure. And as I can see in social media, a lot of people go through the same thing but aren't aware of the consequences
+This past year, people have really had to face the reality of death. We live in a death-denial culture where we are more comfortable just ignoring death but by doing so, we also ignore those who are dying.
 
-### `npm start`
+#### The problem we chose to tackle:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Those nearing end-of-life report being anxious, unprepared and isolated. Logistical tasks are left to the last minute and relationships are not complete as loved ones shun the dying. This is caused by existing in a death-denial culture caused by industrialization and the advancement of medicine.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+#### Target audience:
 
-### `npm test`
+Those nearing end-of-life, including chronically and/or terminally ill patients of all ages, as well as their family and friends.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### What it does
 
-### `npm run build`
+cordura is a web app where users nearing end-of-life can easily complete their logistical last steps, plan fun activities they’d like to do before passing, and invite loved ones to do them with. It highlights the elephant in the room and solves the pervasive problem of loneliness and death anxiety. 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### How I built it
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+### Accomplishments that I'm proud of
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### What I learned
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### What's next for Cordura
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+`Authentication`
+- [ ] authentication using magic
 
-### Code Splitting
+`To Do`
+- [ ] warning on attempt of adding more than four task for a day
+- [ ] add email invite in todo list
+- [ ] suggestion of task randomly
+- [ ] task suggestion which have been added by maximum users
+- [ ] setting up the reminder feature
+- [ ] suggesting user who have more than 50% similarities on task list for initiating a chat with them
+- [ ] daily special task suggestion which benefits in mental and physical health
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+`Messaging Platform`
+- [ ] platform setup
+- [ ] sentiment analysis using symbl.ai
+- [ ] music suggestion based on conversation mood
+- [ ] choosing feature to stay in karaoke or leave (turn on/off the music and changing UI based on mood)
+- [ ] finding TF model to suggest music
+- [ ] converting model in TF.js
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+`Special events`
 
-### Making a Progressive Web App
+- [ ] suggesting special events in near by areas
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+ 
 
-### Advanced Configuration
+### Built With
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+`react.js`&nbsp; &nbsp; `firebase`&nbsp; &nbsp; `magic`&nbsp; &nbsp; `symbl.ai`
