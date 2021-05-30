@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
 import { db } from './firebase'
-import SignUp from './signUp'
+import SignUp from './msg'
 
-function Todo() {
+function Todo({ user }) {
 
     let[idx] = useState(new Date().getDay())
     const[arr] = useState(['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'])
@@ -13,11 +13,11 @@ function Todo() {
     const[tod, setTod] = useState([]) //tod = today's list
     const[yesRem, setYRem] = useState([]) //yesRem = yesterday's remaining
     const[tom, setTom] = useState([]) //tomorrow's list
-    const[cur, setCur] = useState({})
+    const[cur, setCur] = useState({}) //current object
 
     useEffect(() => {
         let yesIdx = ((idx-1)%arr.length + arr.length)%arr.length
-        db.collection('user').doc(`${arr[yesIdx]}`).collection('tasks').get()
+        db.collection(`${user}`).doc(`${arr[yesIdx]}`).collection('tasks').get()
         .then(doc => {
             let yArr = []
             doc.forEach(document => {
@@ -28,7 +28,7 @@ function Todo() {
         .catch(err => alert(err))
 
         let todIdx = idx
-        db.collection('user').doc(`${arr[todIdx]}`).collection('tasks').get()
+        db.collection(`${user}`).doc(`${arr[todIdx]}`).collection('tasks').get()
         .then(doc => {
             let todArr = []
             doc.forEach(document => {
@@ -39,7 +39,7 @@ function Todo() {
         .catch(err => alert(err))
 
         let tomIdx = (idx+1)%arr.length
-        db.collection('user').doc(`${arr[tomIdx]}`).collection('tasks').get()
+        db.collection(`${user}`).doc(`${arr[tomIdx]}`).collection('tasks').get()
         .then(doc => {
             let tomArr = []
             doc.forEach(document => {
@@ -71,20 +71,20 @@ function Todo() {
         }
 
         let yesIdx = ((idx-2)%arr.length + arr.length)%arr.length
-        let yes = db.collection('user').doc(`${arr[yesIdx]}`).collection('tasks')
+        let yes = db.collection(`${user}`).doc(`${arr[yesIdx]}`).collection('tasks')
         yes.get()
         .then(doc => {
             doc.forEach(el => {
                 yes.doc(`${el.id}`).update(obj1)
             })
             yesIdx = ((idx-1)%arr.length + arr.length)%arr.length
-            yes = db.collection('user').doc(`${arr[yesIdx]}`).collection('tasks')
+            yes = db.collection(`${user}`).doc(`${arr[yesIdx]}`).collection('tasks')
             yes.get()
             .then(doc => {
                 doc.forEach(el => {
                     if(el.data().status) yes.doc(`${el.id}`).update(obj1)
                 })
-                let docRef = db.collection('user').doc(`${day}`).collection('tasks')
+                let docRef = db.collection(`${user}`).doc(`${day}`).collection('tasks')
                 docRef.get()
                 .then(doc => {
                     let flag = 0
@@ -146,20 +146,9 @@ function Todo() {
                 </div>
             </form>
 
-            <div>
-                {yesRem.map(val => (<div>{JSON.stringify(val)}</div>))}
+            <div className="todos">
+
             </div>
-            <br />
-            <br />
-            <div>
-                {tod.map(val => (<div>{JSON.stringify(val)}</div>))}
-            </div>
-            <br />
-            <br />
-            <div>
-                {tom.map(val => (<div>{JSON.stringify(val)}</div>))}
-            </div>
-            {/* <SignUp /> */}
         </div>
     )
 }
