@@ -1,11 +1,11 @@
 // import Todo from './components/todo'
-import { Magic } from 'magic-sdk'
 import { useState, useEffect } from 'react';
 import { auth, fu } from './components/firebase'
 import Suggest from './components/autoSuggest'
 import { useAuth0 } from "@auth0/auth0-react";
 import Profile from './components/userProf'
 import { db, rl } from './components/firebase'
+import Msg from './components/msg'
 
 function App() {
 
@@ -23,7 +23,8 @@ function App() {
         })
         if(flag === 0) {
           rl.ref('user').push({
-            ID: user.nickname
+            ID: user.nickname,
+            name: user.name
           })
           const obj = {
             EventName: "",
@@ -58,6 +59,7 @@ function App() {
       }}>
         <input type="submit" value="Submit"></input>
       </form>
+      {isAuthenticated ? <Msg id={user.nickname}/>:<div></div>}
       <Profile />
     </div>
   )
