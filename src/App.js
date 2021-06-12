@@ -1,11 +1,9 @@
 // import Todo from './components/todo'
-import { useState, useEffect } from 'react';
-import { auth, fu } from './components/firebase'
-import Suggest from './components/autoSuggest'
-import { useAuth0 } from "@auth0/auth0-react";
+import { useEffect } from 'react';
+import { useAuth0 } from "@auth0/auth0-react"
 import Profile from './components/userProf'
 import { db, rl } from './components/firebase'
-import Msg from './components/msg'
+import { BrowserRouter as Router, Route, Redirect, useHistory, Switch } from 'react-router-dom'
 
 function App() {
 
@@ -50,17 +48,18 @@ function App() {
         }
       })
     }
+    console.log(isAuthenticated)
   }, [isAuthenticated])
 
   return (
     <div>
-      <form onSubmit={() => {
-        loginWithRedirect()
-      }}>
-        <input type="submit" value="Submit"></input>
-      </form>
-      {isAuthenticated ? <Msg id={user.nickname}/>:<div></div>}
-      <Profile />
+      {!isAuthenticated ? 
+        <form onSubmit={(e) => {
+            loginWithRedirect()
+          }}>
+            <input type="submit" value="Submit"></input>
+        </form>:<Profile />
+      }
     </div>
   )
 }

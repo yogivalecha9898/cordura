@@ -26,7 +26,7 @@ function Msg({ id }) {
         e.preventDefault()
         db.collection(`${id}`).doc('msgs').collection('sent')
         .add({
-            to: "lifeisgaming2049",
+            to: toUser,
             text: text
         })
         .then(() => {
