@@ -1,66 +1,43 @@
 // import Todo from './components/todo'
-import { useEffect } from 'react';
-import { useAuth0 } from "@auth0/auth0-react"
-import Profile from './components/userProf'
-import { db, rl } from './components/firebase'
-import { BrowserRouter as Router, Route, Redirect, useHistory, Switch } from 'react-router-dom'
+import './style/custom.css'
+import './style/main.css'
+import { useState } from 'react'
+import UserProfile from './components/userProf'
+import Sign_In from './components/signInForm'
+import Sign_Up from './components/signUpForm'
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
 
 function App() {
 
-  const { user, loginWithRedirect, isAuthenticated } = useAuth0()
-
-  useEffect(() => {
-    if(isAuthenticated) {
-      console.log(user)
-      rl.ref('user').get().then(users => {
-        let flag = 0
-        users.forEach(u => {
-          if(u.val().ID === user.nickname) {
-            flag = 1
-          }
-        })
-        if(flag === 0) {
-          rl.ref('user').push({
-            ID: user.nickname,
-            name: user.name
-          })
-          const obj = {
-            EventName: "",
-            EventDisc: "",
-            Day: "",
-            Id: "",
-            status: false,
-            RemindMe: "",
-            CreatedAt: "",
-          }
-          const arr = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
-          arr.forEach(day => {
-              let docRef = db.collection(`${user.nickname}`).doc(`${day}`).collection('tasks')
-              for(let i = 0; i < 4; i++) {
-                  docRef.add(obj)
-                  .then(doc => {
-                      docRef.doc(`${doc.id}`).update({
-                          Id: doc.id
-                      })
-                  })
-              }
-          })
-        }
-      })
-    }
-    console.log(isAuthenticated)
-  }, [isAuthenticated])
+  console.log(localStorage.getItem("auth"))
 
   return (
-    <div>
-      {!isAuthenticated ? 
-        <form onSubmit={(e) => {
-            loginWithRedirect()
-          }}>
-            <input type="submit" value="Submit"></input>
-        </form>:<Profile />
-      }
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path="/" component={Main} />
+        <Route path="/user" render={() => {
+          return localStorage.getItem("auth") ? <UserProfile />:<Redirect to="/"/>
+        }}/>
+        <Route path="*" render={() => { return <h1>Wrong address</h1>}} /> {/*any invalid address will respond*/}
+      </Switch>
+    </Router>
+  )
+}
+
+function Main() {
+
+  const[toggle, setToggle] = useState(false)
+
+  return (
+    <section className="main">
+        <div className="left center">
+          <h1>Sanity</h1>
+        </div>
+        <div className="right center">
+          {!toggle ? <Sign_In/>:<Sign_Up/>}
+          <p>{toggle ? "Already a User?":"Create an account?"}<span onClick={() => setToggle(!toggle)}>{toggle ? " Sign In":" Sign Up"}</span></p>
+        </div>
+      </section>
   )
 }
 

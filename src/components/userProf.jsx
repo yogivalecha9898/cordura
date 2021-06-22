@@ -1,22 +1,22 @@
-import React from "react";
-import Msg from './msg'
-import { useAuth0 } from "@auth0/auth0-react";
+import { useHistory } from 'react-router-dom'
+import { auth } from './firebase'
 
-const Profile = () => {
-  const { user, isAuthenticated } = useAuth0();
-  console.log(user)
+function UserProfile() {
 
-  return (
-    isAuthenticated && (
-      <div>
-        <img src={user.picture} alt={user.name} />
-        <h2>{user.name}</h2>
-        <h3>{user.nickname}</h3>
-        <p>{user.email}</p>
-        <Msg id={user.nickname}/>
-      </div>
+    let history = useHistory()
+
+    const handleSignOut = () => {
+        auth.signOut()
+        localStorage.removeItem("auth")
+        alert("You have been successfully sign out!")
+        history.push("/")
+    }
+
+    return (
+        <div>
+            <button onClick={handleSignOut}>Sign Out</button>
+        </div>
     )
-  )
 }
 
-export default Profile;
+export default UserProfile
