@@ -59,7 +59,7 @@ function Compo({ data, email, day }) {
     return (
         <div className="mainTodo">
             {data.EventName ? 
-                <section ref={todoReq} className="todos" style={data.status ? {opacity: "0.3", cursor: "pointer"}:{}}>
+                <section ref={todoReq} className="todos" style={data.status ? {opacity: "0.3", cursor: "not-allowed"}:{}}>
                     <header>
                         <h3>{data.EventName}</h3>
                         <p>{data.EventDisc}</p>

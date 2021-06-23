@@ -28,6 +28,17 @@ function Main() {
 
   const[toggle, setToggle] = useState(false)
 
+  const ani1 = {
+    start: {
+      top: 280,
+      left: 280,
+      scale: 0
+    },
+    trans: {
+      scale: 1
+    }
+  }
+
   return (
     <section className="main">
         <div className="left center">

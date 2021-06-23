@@ -5,7 +5,26 @@
 }
 
 .left {
+    position: relative;
     width: 60%;
+    flex-direction: column;
+}
+.left h1 {
+    background: linear-gradient(to left, #96c93d, #00b09b);  
+    background-clip: text;
+    -webkit-text-fill-color: transparent; 
+    font-size: 8em;
+}
+
+.left p {
+    /* display: none; */
+    text-align: justify;
+    padding: 5px;
+    font-size: 2em;
+    width: 60%;
+    border-radius: 5px;
+    word-spacing: 10px;
+    box-shadow: 5px 5px 10px gray;
 }
 
 .right {
