@@ -16,12 +16,12 @@
     /* border: 1px solid black; */
 }
 
-label h1 {
+.form label h1 {
     font-size: 2.5em;
     margin: 25px 0 0 40px;
 }
 
-label input {
+.form label input {
     width: 70%;
     height: 50%;
     padding: 0 0 0 20px;
@@ -31,11 +31,11 @@ label input {
     border-radius: 5px;
 }
 
-label input::placeholder {
+.form label input::placeholder {
     color: gray;
 }
 
-label input[type="submit"] {
+.form label input[type="submit"] {
     padding: 0 0 0 0;
     width: 50%;
     cursor: pointer;
@@ -46,6 +46,56 @@ label input[type="submit"] {
     background: #00b09b;
 }
 
-label input[type="submit"]:hover {
+.form label input[type="submit"]:hover {
     background: #03a18f;
+}
+
+.todoForm {
+    width: 40%;
+    height: 40%;
+    background: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 11.5px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    position: relative;
+}
+.todoForm .cross {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 2em;
+    cursor: pointer;
+}
+#todoForm {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+#todoForm label {
+    height: 20%;
+}
+#todoForm label input {
+    margin: 10px 0 0 10px;
+}
+#todoForm label input[type="text"] {
+    border: none;
+    outline: none;
+    width: 60%;
+    height: 30px;
+    padding: 0 0 0 20px;
+    background: none;
+    border-bottom: 1px solid white;
+}
+#todoForm label input[type="submit"] {
+    width: 30%;
+    height: 30px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: #00b09b;
+    color: #fff;
+    font-size: 2em;
+    border-radius: 5px;
 }

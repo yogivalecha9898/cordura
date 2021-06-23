@@ -1,154 +1,74 @@
 import { useEffect, useState } from "react"
-import { db } from './firebase'
+import { db, rl } from './firebase'
 import SignUp from './msg'
+// import '../style/form.css'
 
-function Todo({ user }) {
+function Todo({ email, setAdd, setTom, setTod, getTask }) {
 
-    let[idx] = useState(new Date().getDay())
+    // some constants
+    const[userId] = useState(localStorage.getItem("auth"))
+    const[idx] = useState(new Date().getDay()) //gets the current day, determining the index req 
     const[arr] = useState(['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'])
-    const[name, setName] = useState('')
-    const[dis, setDis] = useState('')
+
+    // required variables
+    const[eName, setEName] = useState('')
+    const[eDisc, setEDisc] = useState('')
     const[day, setDay] = useState('')
-    const[time, setTime] = useState('')
-    const[tod, setTod] = useState([]) //tod = today's list
-    const[yesRem, setYRem] = useState([]) //yesRem = yesterday's remaining
-    const[tom, setTom] = useState([]) //tomorrow's list
-    const[cur, setCur] = useState({}) //current object
 
-    useEffect(() => {
-        let yesIdx = ((idx-1)%arr.length + arr.length)%arr.length
-        db.collection(`${user}`).doc(`${arr[yesIdx]}`).collection('tasks').get()
-        .then(doc => {
-            let yArr = []
-            doc.forEach(document => {
-                if(!document.data().status) yArr.push(document.data())
-            })
-            setYRem(yArr)
-        })
-        .catch(err => alert(err))
-
-        let todIdx = idx
-        db.collection(`${user}`).doc(`${arr[todIdx]}`).collection('tasks').get()
-        .then(doc => {
-            let todArr = []
-            doc.forEach(document => {
-                todArr.push(document.data())
-            })
-            setTod(todArr)
-        })
-        .catch(err => alert(err))
-
-        let tomIdx = (idx+1)%arr.length
-        db.collection(`${user}`).doc(`${arr[tomIdx]}`).collection('tasks').get()
-        .then(doc => {
-            let tomArr = []
-            doc.forEach(document => {
-                tomArr.push(document.data())
-            })
-            setTom(tomArr)
-        })
-    }, [cur])
-
-    const handleChange = (e)=> {
+    const handleSubmit = async e => {
         e.preventDefault()
-
-        const obj1 = {
-            EventName: "",
-            EventDisc: "",
-            Day: "",
-            status: false,
-            RemindMe: "",
-            CreatedAt: ""
-        }
-
-        const obj2 = {
-            EventName: name,
-            EventDisc: dis,
-            Day: day,
-            status: false,
-            RemindMe: time,
-            CreatedAt: new Date().getTime()
-        }
-
-        let yesIdx = ((idx-2)%arr.length + arr.length)%arr.length
-        let yes = db.collection(`${user}`).doc(`${arr[yesIdx]}`).collection('tasks')
-        yes.get()
-        .then(doc => {
-            doc.forEach(el => {
-                yes.doc(`${el.id}`).update(obj1)
+        if(day && eName && eDisc) {
+            let flag = undefined
+            const ref = db.collection(email).doc(day).collection('tasks')
+            const req = await ref.get()
+            req.forEach(async task => {
+                if(!flag && !task.data().EventName) {
+                    flag = !flag
+                    const obj = {
+                        EventName: eName,
+                        EventDisc: eDisc,
+                        Day: day,
+                        CreatedAt: new Date().getTime()
+                    }
+                    const after = await ref.doc(task.id).update(obj)//updating the task which was initially empty, using ref to locate to that task
+                    const tArr = day === arr[idx] ? await getTask(idx, false): await getTask((idx+1)%7, false) 
+                    day === arr[idx] ? setTod(tArr):setTom(tArr)
+                    clear()
+                    setAdd(false)
+                }
             })
-            yesIdx = ((idx-1)%arr.length + arr.length)%arr.length
-            yes = db.collection(`${user}`).doc(`${arr[yesIdx]}`).collection('tasks')
-            yes.get()
-            .then(doc => {
-                doc.forEach(el => {
-                    if(el.data().status) yes.doc(`${el.id}`).update(obj1)
-                })
-                let docRef = db.collection(`${user}`).doc(`${day}`).collection('tasks')
-                docRef.get()
-                .then(doc => {
-                    let flag = 0
-                    doc.forEach(el => {
-                        if(el.data().EventName === "" && flag !== 1) {
-                            flag = 1
-                            docRef.doc(`${el.id}`).update(obj2)
-                        }
-                    })
-                    setCur(obj2)
-                    if(flag === 0) alert("Only 4 todos are to be done in a day")
-                    else docRef.orderBy("CreatedAt", "asc")
-                })
-            })
-        })
+            if(!flag) alert("Only 4 at most tasks are allowed")
+        } else alert("Input the fields correctly!")
+    }
 
-
-        const form = document.getElementById('form')
-        form.reset()
+    const clear = () => {
+        setEName('')
+        setEDisc('')
+        setDay('')
+        document.getElementById('todoForm').reset()
     }
 
     return (
-        <div>
-            <form onSubmit={handleChange} id="form">
-                <div>
-                    <label>Event Name</label>
-                    <input type="text" placeholder="Add event name" onChange={e => setName(e.target.value)}/>
-                </div>
-                <div>
-                    <label>Event Description</label>
-                    <textarea placeholder="Add event description" onChange={e => setDis(e.target.value)}/>
-                </div>
-                <div>
-                    <label>Select Day</label>
-                    <input 
-                        type="radio" 
-                        name="day" 
-                        value={arr[idx%arr.length]} 
-                        onClick={e => setDay(arr[idx%arr.length])}
-                    />Today ({arr[idx]})
-
-                    <input 
-                        type="radio" 
-                        name="day" 
-                        value={arr[(idx+1)%arr.length]} 
-                        onClick={e => setDay(arr[(idx+1)%arr.length])}
-                    />Tomorrow ({arr[(idx+1)%arr.length]})
-                </div>
-                <div>
-                    <label>Remind me at</label>
-                    <input type="time" onChange={e => setTime(e.target.value)}/>
-                </div>
-                <div>
-                    <label>Invite</label>
-                    <input type="email" placeholder="Enter mail address"/>
-                </div>
-                <div>
-                    <input type="submit" value="Submit"/>
-                </div>
+        <div className="todoForm">
+            <div className="cross" onClick={() => setAdd(false)}>X</div>
+            <form id="todoForm" onSubmit={handleSubmit}>
+                <label>
+                    <h1>Event</h1>
+                </label>
+                <label>
+                    <input value={eName} type="text" placeholder="Event Name" onChange={e => setEName(e.target.value)}/>
+                </label>
+                <label>
+                    <input value={eDisc} type="text" placeholder="Event Discription" onChange={e => setEDisc(e.target.value)}/>
+                </label>
+                <label>
+                    <input value={arr[idx]} type="radio" name="day" onClick={e => setDay(e.target.value)}/>Today {`(${arr[idx]})`}
+                    <input value={arr[(idx+1)%7]} type="radio" name="day" onClick={e => setDay(e.target.value)}/>Tomorrow {`(${arr[(idx+1)%7]})`}
+                </label>
+                <label>
+                    <input type="submit" value="Add"/>
+                </label>
             </form>
-
-            <div className="todos">
-
-            </div>
         </div>
     )
 }

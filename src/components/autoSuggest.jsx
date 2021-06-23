@@ -27,16 +27,15 @@ function Suggest() {
     }
 
     return (
-        <div>
+        <div className="suggest">
             <h1>Some suggestions</h1>
             {arr.map(el => {
-                return <div>{el}</div>
+                return <div className="randomSug">{el}</div>
             })}
-            <br />
             <br />
             <h1>Today's Special Suggestions</h1>
             {spArr.map(el => {
-                return <div>{el}</div>
+                return <div className="speRandomSug">{el}</div>
             })}
         </div>
     )

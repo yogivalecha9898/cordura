@@ -16,6 +16,10 @@ body {
     font-family: 'Montserrat', sans-serif
 }
 
+body::-webkit-scrollbar {
+    display: none;
+}
+
 .center {
     display: flex;
     align-items: center;
