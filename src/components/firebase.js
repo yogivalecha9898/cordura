@@ -4,14 +4,12 @@ import 'firebase/database'
 import 'firebase/auth'
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCC0yatfO-cU8l9RrrPI4PKZpTZCt8Y4C8",
-    authDomain: "elastic-e1db0.firebaseapp.com",
-    databaseURL: "https://elastic-e1db0-default-rtdb.firebaseio.com",
-    projectId: "elastic-e1db0",
-    storageBucket: "elastic-e1db0.appspot.com",
-    messagingSenderId: "189585229069",
-    appId: "1:189585229069:web:e66dfcdf7b0a307dee5c44",
-    measurementId: "G-KW5N5GQCYD"
+  apiKey: "AIzaSyBWgQTK7o1prwq40bD5C1QdkoTZlrueYUE",
+  authDomain: "cordura-9d771.firebaseapp.com",
+  projectId: "cordura-9d771",
+  storageBucket: "cordura-9d771.appspot.com",
+  messagingSenderId: "387908976820",
+  appId: "1:387908976820:web:bfb07f753fd814b94e97e1"
 };
 
 firebase.initializeApp(firebaseConfig);
